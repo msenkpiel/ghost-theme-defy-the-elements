@@ -28,7 +28,7 @@ into the {body} of the default.hbs template --}}
             {{#foreach posts}}
 
                 {{!-- list only posts without hidden tag on index page --}}
-                {{^has tag="#hidden"}}
+                {{^has tag="#noindex"}}
 
                     {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
                     {{> "post-card"}}
