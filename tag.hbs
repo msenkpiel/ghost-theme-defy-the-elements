@@ -24,8 +24,13 @@
     <div class="inner posts">
         <div class="post-feed">
             {{#foreach posts}}
-                {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
-                {{> "post-card"}}
+                {{!-- list only posts without hidden tag on index page --}}
+                {{^has tag="#hidden"}}
+
+                    {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+                    {{> "post-card"}}
+
+                {{/has}}
             {{/foreach}}
         </div>
     </div>
