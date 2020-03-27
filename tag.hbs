@@ -6,7 +6,7 @@
     {{> site-header}}
     {{> header-background background=feature_image}} {{!--Special header-image.hbs partial to generate the background image--}}
         <div class="inner site-header-content">
-            <h1 class="site-title">{{name}}</h1>
+            <h1 class="site-title">{{name}}:: {{@slug}}</h1>
             <h2 class="site-description">
                 {{#if description}}
                 {{description}}
@@ -24,31 +24,24 @@
     <div class="inner posts">
         <div class="post-feed">
 
-            {{#get "posts" filter="featured:true" limit="all" as |featured|}}
-                {{#foreach featured}}
-                
-                    {{!-- list only posts without hidden tag on index page --}}
-                    {{^has tag="#notag"}}
-
-                        {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
-                        {{> "post-card"}}
-
-                    {{/has}}
-                {{/foreach}}
-                
-            {{/get}}
-
+            {{!-- loop through all featured posts with this tag --}}
             {{#foreach posts}}
-                {{^if featured}}
-                    {{!-- list only posts without hidden tag on index page --}}
+                {{#if featured}}
                     {{^has tag="#notag"}}
-
-                        {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
                         {{> "post-card"}}
-
                     {{/has}}
                 {{/if}}
             {{/foreach}}
+
+            {{!-- loop through none featured posts with this tag --}}
+            {{#foreach posts}}
+                {{^if featured}}
+                    {{^has tag="#notag"}}
+                        {{> "post-card"}}
+                    {{/has}}
+                {{/if}}
+            {{/foreach}}
+            
         </div>
     </div>
 </main>
